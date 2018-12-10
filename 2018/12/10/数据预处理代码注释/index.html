@@ -108,23 +108,25 @@
 
 
 
-  <meta name="description" content="一点微小的工作。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="blog of zhang peng">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="12345678910111213141516171819def preprocess_review(data, sent_length, max_rev_len, keep_in_dict=10000):    ## As the result, each review will be composed of max_rev_len sentences. If the original revi">
+<meta name="keywords" content="han preprocessing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="han数据预处理代码注释">
+<meta property="og:url" content="http://yoursite.com/2018/12/10/数据预处理代码注释/index.html">
 <meta property="og:site_name" content="blog of zhang peng">
-<meta property="og:description" content="一点微小的工作。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:description" content="12345678910111213141516171819def preprocess_review(data, sent_length, max_rev_len, keep_in_dict=10000):    ## As the result, each review will be composed of max_rev_len sentences. If the original revi">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-10T03:18:55.788Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="blog of zhang peng">
-<meta name="twitter:description" content="一点微小的工作。">
+<meta name="twitter:title" content="han数据预处理代码注释">
+<meta name="twitter:description" content="12345678910111213141516171819def preprocess_review(data, sent_length, max_rev_len, keep_in_dict=10000):    ## As the result, each review will be composed of max_rev_len sentences. If the original revi">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/10/数据预处理代码注释/">
 
 
 
@@ -134,7 +136,7 @@
   };
 </script>
 
-  <title>blog of zhang peng</title>
+  <title>han数据预处理代码注释 | blog of zhang peng</title>
   
 
 
@@ -176,15 +178,14 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -221,7 +222,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -283,9 +284,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -317,10 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/10/数据预处理代码注释/" class="post-title-link" itemprop="http://yoursite.com/index.html">han数据预处理代码注释</a>
+          <h1 class="post-title" itemprop="name headline">han数据预处理代码注释
               
             
           </h1>
@@ -383,11 +381,7 @@
       
 
       
-        
-          
-            <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">def</span> preprocess_review(<span class="meta">data</span>, sent_length, max_rev_len, keep_in_dict<span class="number">=10000</span>):</span><br><span class="line">    ## As the result, each <span class="keyword">review </span>will <span class="keyword">be </span>composed of max_rev_len sentences. <span class="meta">If</span> the original <span class="keyword">review </span>is longer than that, we truncate <span class="keyword">it, </span><span class="keyword">and </span><span class="meta">if</span> shorter than that, we append empty sentences to <span class="keyword">it. </span><span class="keyword">And </span>each sentence will <span class="keyword">be </span>composed of sent_length words. <span class="meta">If</span> the original sentence is longer than that, we truncate <span class="keyword">it, </span><span class="keyword">and </span><span class="meta">if</span> shorter, we append the word of <span class="string">'UNK'</span> to <span class="keyword">it. </span>Also, we <span class="meta">keep</span> track of the actual number of sentences each <span class="keyword">review </span>contains.</span><br><span class="line">    data_formatted = []</span><br><span class="line">    <span class="keyword">review_lens </span>= []</span><br><span class="line">    for <span class="keyword">review </span>in <span class="meta">data</span>:</span><br><span class="line">        <span class="keyword">review_formatted </span>= preprocessing.sequence.pad_sequences(<span class="keyword">review, </span>maxlen<span class="symbol">=sent_length</span>, padding=<span class="string">"post"</span>, truncating=<span class="string">"post"</span>, value<span class="symbol">=keep_in_dict</span>+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">review_len </span>= <span class="keyword">review_formatted.shape[0]</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">review_lens.append(review_len </span><span class="meta">if</span> <span class="keyword">review_len&lt;=max_rev_len </span><span class="meta">else</span> max_rev_len)</span><br><span class="line">        lack_len = max_rev_length - <span class="keyword">review_len</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">review_formatted_right_len </span>= <span class="keyword">review_formatted</span></span><br><span class="line"><span class="keyword"> </span>       <span class="meta">if</span> lack_len &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="symbol">#extra_rows</span> = np.zeros([lack_len, sent_length], dtype<span class="symbol">=np</span>.int32)</span><br><span class="line">            extra_rows = np.full((lack_len, sent_length), keep_in_dict+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">review_formatted_right_len </span>= np.append(<span class="keyword">review_formatted, </span>extra_rows, axis<span class="number">=0</span>)</span><br><span class="line">        <span class="meta">elif</span> lack_len &lt; <span class="number">0</span>:</span><br><span class="line">            row_index = [max_rev_length+i for i in list(range(<span class="number">0</span>, -lack_len))]</span><br><span class="line">            <span class="keyword">review_formatted_right_len </span>= np.delete(<span class="keyword">review_formatted, </span>row_index, axis<span class="number">=0</span>)</span><br><span class="line">        data_formatted.append(<span class="keyword">review_formatted_right_len)</span></span><br><span class="line"><span class="keyword"> </span>   return data_formatted, <span class="keyword">review_lens</span></span><br></pre></td></tr></table></figure>
-          
-        
+        <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">def</span> preprocess_review(<span class="meta">data</span>, sent_length, max_rev_len, keep_in_dict<span class="number">=10000</span>):</span><br><span class="line">    ## As the result, each <span class="keyword">review </span>will <span class="keyword">be </span>composed of max_rev_len sentences. <span class="meta">If</span> the original <span class="keyword">review </span>is longer than that, we truncate <span class="keyword">it, </span><span class="keyword">and </span><span class="meta">if</span> shorter than that, we append empty sentences to <span class="keyword">it. </span><span class="keyword">And </span>each sentence will <span class="keyword">be </span>composed of sent_length words. <span class="meta">If</span> the original sentence is longer than that, we truncate <span class="keyword">it, </span><span class="keyword">and </span><span class="meta">if</span> shorter, we append the word of <span class="string">'UNK'</span> to <span class="keyword">it. </span>Also, we <span class="meta">keep</span> track of the actual number of sentences each <span class="keyword">review </span>contains.</span><br><span class="line">    data_formatted = []</span><br><span class="line">    <span class="keyword">review_lens </span>= []</span><br><span class="line">    for <span class="keyword">review </span>in <span class="meta">data</span>:</span><br><span class="line">        <span class="keyword">review_formatted </span>= preprocessing.sequence.pad_sequences(<span class="keyword">review, </span>maxlen<span class="symbol">=sent_length</span>, padding=<span class="string">"post"</span>, truncating=<span class="string">"post"</span>, value<span class="symbol">=keep_in_dict</span>+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">review_len </span>= <span class="keyword">review_formatted.shape[0]</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">review_lens.append(review_len </span><span class="meta">if</span> <span class="keyword">review_len&lt;=max_rev_len </span><span class="meta">else</span> max_rev_len)</span><br><span class="line">        lack_len = max_rev_length - <span class="keyword">review_len</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">review_formatted_right_len </span>= <span class="keyword">review_formatted</span></span><br><span class="line"><span class="keyword"> </span>       <span class="meta">if</span> lack_len &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="symbol">#extra_rows</span> = np.zeros([lack_len, sent_length], dtype<span class="symbol">=np</span>.int32)</span><br><span class="line">            extra_rows = np.full((lack_len, sent_length), keep_in_dict+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">review_formatted_right_len </span>= np.append(<span class="keyword">review_formatted, </span>extra_rows, axis<span class="number">=0</span>)</span><br><span class="line">        <span class="meta">elif</span> lack_len &lt; <span class="number">0</span>:</span><br><span class="line">            row_index = [max_rev_length+i for i in list(range(<span class="number">0</span>, -lack_len))]</span><br><span class="line">            <span class="keyword">review_formatted_right_len </span>= np.delete(<span class="keyword">review_formatted, </span>row_index, axis<span class="number">=0</span>)</span><br><span class="line">        data_formatted.append(<span class="keyword">review_formatted_right_len)</span></span><br><span class="line"><span class="keyword"> </span>   return data_formatted, <span class="keyword">review_lens</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -408,156 +402,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/My-New-Post/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Peng Zhang">
-      <meta itemprop="description" content="一点微小的工作。">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blog of zhang peng">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/06/My-New-Post/" class="post-title-link" itemprop="http://yoursite.com/index.html">My New Post</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-06 20:13:11 / 修改时间：21:00:03" itemprop="dateCreated datePublished" datetime="2018-12-06T20:13:11+08:00">2018-12-06</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/han-preprocessing/" rel="tag"># han preprocessing</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>A little bit of work, very ashamed。口–口</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/06/My-New-Post/" rel="next" title="My New Post">
+                <i class="fa fa-chevron-left"></i> My New Post
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -567,14 +441,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -790,6 +665,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
 
   
 
