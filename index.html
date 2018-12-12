@@ -354,7 +354,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/12/tf-layers-Dense的内部运算/" class="post-title-link" itemprop="http://yoursite.com/index.html">未命名</a>
+                <a href="/2018/12/12/tf-layers-Dense的内部运算/" class="post-title-link" itemprop="http://yoursite.com/index.html">tf.layers.Dense的内部运算</a>
               
             
           </h1>
@@ -379,7 +379,7 @@
                 
               
 
-              <time title="创建时间：2018-12-12 15:42:31 / 修改时间：15:58:24" itemprop="dateCreated datePublished" datetime="2018-12-12T15:42:31+08:00">2018-12-12</time>
+              <time title="创建时间：2018-12-12 15:42:31 / 修改时间：16:04:13" itemprop="dateCreated datePublished" datetime="2018-12-12T15:42:31+08:00">2018-12-12</time>
             
 
             
@@ -419,9 +419,7 @@
       
         
           
-            <hr>
-<p>title: tf.layers.Dense的内部运算<br>date: 2018-12-12 15:42:31<br>tags:<br> tf函数—</p>
-<p>tf.layers.Dense函数实现了全连接层，有一个值得关注的问题是在接收的输入维度是[batchsize,m,n]这样的三维张量时，函数是如何计算的。<br>测试代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tf.enable_eager_execution()</span><br><span class="line">input = np.ones([<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>])</span><br><span class="line">input[<span class="number">0</span>,<span class="number">1</span>]=[<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>]</span><br><span class="line">input=tf.constant(input)</span><br><span class="line">print(input)</span><br><span class="line">u=tf.layers.Dense(<span class="number">10</span>) <span class="comment">##10为out_units</span></span><br><span class="line">y=u(input)</span><br><span class="line">print(np.sum(u.get_weights()[<span class="number">0</span>],<span class="number">0</span>))</span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure></p>
+            <p>tf.layers.Dense函数实现了全连接层，有一个值得关注的问题是在接收的输入维度是[batchsize,m,n]这样的三维张量时，函数是如何计算的。<br>测试代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tf.enable_eager_execution()</span><br><span class="line">input = np.ones([<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>])</span><br><span class="line">input[<span class="number">0</span>,<span class="number">1</span>]=[<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>]</span><br><span class="line">input=tf.constant(input)</span><br><span class="line">print(input)</span><br><span class="line">u=tf.layers.Dense(<span class="number">10</span>) <span class="comment">##10为out_units</span></span><br><span class="line">y=u(input)</span><br><span class="line">print(np.sum(u.get_weights()[<span class="number">0</span>],<span class="number">0</span>))</span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure></p>
 <p>输出：<br>tf.Tensor(<br>[[[1. 1. 1. 1. 1. 1.]<br>  [2. 2. 2. 2. 2. 2.]<br>  [1. 1. 1. 1. 1. 1.]]</p>
 <p> [[1. 1. 1. 1. 1. 1.]<br>  [1. 1. 1. 1. 1. 1.]<br>  [1. 1. 1. 1. 1. 1.]]</p>
 <p> [[1. 1. 1. 1. 1. 1.]<br>  [1. 1. 1. 1. 1. 1.]<br>  [1. 1. 1. 1. 1. 1.]]</p>
@@ -987,7 +985,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
