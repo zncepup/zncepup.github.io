@@ -334,6 +334,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/12/tf-layers-Dense的内部运算/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peng Zhang">
+      <meta itemprop="description" content="一点微小的工作。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="peng zhang's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/12/tf-layers-Dense的内部运算/" class="post-title-link" itemprop="http://yoursite.com/index.html">未命名</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-12 15:42:31 / 修改时间：15:58:24" itemprop="dateCreated datePublished" datetime="2018-12-12T15:42:31+08:00">2018-12-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title: tf.layers.Dense的内部运算<br>date: 2018-12-12 15:42:31<br>tags:<br> tf函数—</p>
+<p>tf.layers.Dense函数实现了全连接层，有一个值得关注的问题是在接收的输入维度是[batchsize,m,n]这样的三维张量时，函数是如何计算的。<br>测试代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tf.enable_eager_execution()</span><br><span class="line">input = np.ones([<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>])</span><br><span class="line">input[<span class="number">0</span>,<span class="number">1</span>]=[<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>,<span class="number">2.</span>]</span><br><span class="line">input=tf.constant(input)</span><br><span class="line">print(input)</span><br><span class="line">u=tf.layers.Dense(<span class="number">10</span>) <span class="comment">##10为out_units</span></span><br><span class="line">y=u(input)</span><br><span class="line">print(np.sum(u.get_weights()[<span class="number">0</span>],<span class="number">0</span>))</span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br>tf.Tensor(<br>[[[1. 1. 1. 1. 1. 1.]<br>  [2. 2. 2. 2. 2. 2.]<br>  [1. 1. 1. 1. 1. 1.]]</p>
+<p> [[1. 1. 1. 1. 1. 1.]<br>  [1. 1. 1. 1. 1. 1.]<br>  [1. 1. 1. 1. 1. 1.]]</p>
+<p> [[1. 1. 1. 1. 1. 1.]<br>  [1. 1. 1. 1. 1. 1.]<br>  [1. 1. 1. 1. 1. 1.]]</p>
+<p> [[1. 1. 1. 1. 1. 1.]<br>  [1. 1. 1. 1. 1. 1.]<br>  [1. 1. 1. 1. 1. 1.]]], shape=(4, 3, 6), dtype=float64)<br>[-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638  0.28534595<br> -0.01758572 -0.6388537  -0.99521742 -0.59295341]<br>tf.Tensor(<br>[[[-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638<br>    0.28534595 -0.01758572 -0.6388537  -0.99521742 -0.59295341]<br>  [-1.98283793 -0.99260048 -1.8802868  -1.79091705 -4.47063277<br>    0.5706919  -0.03517144 -1.2777074  -1.99043485 -1.18590682]<br>  [-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638<br>    0.28534595 -0.01758572 -0.6388537  -0.99521742 -0.59295341]]</p>
+<p> [[-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638<br>    0.28534595 -0.01758572 -0.6388537  -0.99521742 -0.59295341]<br>  [-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638<br>    0.28534595 -0.01758572 -0.6388537  -0.99521742 -0.59295341]<br>  [-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638<br>    0.28534595 -0.01758572 -0.6388537  -0.99521742 -0.59295341]]</p>
+<p> [[-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638<br>    0.28534595 -0.01758572 -0.6388537  -0.99521742 -0.59295341]<br>  [-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638<br>    0.28534595 -0.01758572 -0.6388537  -0.99521742 -0.59295341]<br>  [-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638<br>    0.28534595 -0.01758572 -0.6388537  -0.99521742 -0.59295341]]</p>
+<p> [[-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638<br>    0.28534595 -0.01758572 -0.6388537  -0.99521742 -0.59295341]<br>  [-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638<br>    0.28534595 -0.01758572 -0.6388537  -0.99521742 -0.59295341]<br>  [-0.99141896 -0.49630024 -0.9401434  -0.89545853 -2.23531638<br>    0.28534595 -0.01758572 -0.6388537  -0.99521742 -0.59295341]]], shape=(4, 3, 10), dtype=float64)</p>
+<p>可以发现，权重矩阵W的shape为[6,10]，即[n,out_units]，结果也表明，运算是把batch中的每个[m,n]当做m个n维向量分别进行运算的，输出结果是m个out_units维的向量。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/11/书签/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -379,12 +531,24 @@
                 
               
 
-              <time title="创建时间：2018-12-11 16:05:31 / 修改时间：17:05:07" itemprop="dateCreated datePublished" datetime="2018-12-11T16:05:31+08:00">2018-12-11</time>
+              <time title="创建时间：2018-12-11 16:05:31" itemprop="dateCreated datePublished" datetime="2018-12-11T16:05:31+08:00">2018-12-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 10:22:19" itemprop="dateModified" datetime="2018-12-12T10:22:19+08:00">2018-12-12</time>
               
             
           </span>
@@ -419,7 +583,7 @@
       
         
           
-            <p><a href="https://www.cnblogs.com/lovychen/p/9368390.html" target="_blank" rel="noopener">RNN、Lstm源码，训练代码输入输出，维度分析</a><br><a href="https://www.cnblogs.com/loveyouyou616/p/7525863.html" target="_blank" rel="noopener">python调试工具pdb</a></p>
+            <p><a href="https://www.cnblogs.com/lovychen/p/9368390.html" target="_blank" rel="noopener">RNN、Lstm源码，训练代码输入输出，维度分析</a><br><a href="https://www.cnblogs.com/loveyouyou616/p/7525863.html" target="_blank" rel="noopener">python调试工具pdb</a><br><a href="https://mp.weixin.qq.com/s?__biz=MzU0MDQ1NjAzNg==&amp;mid=2247485192&amp;idx=1&amp;sn=4320fd2a6e94aef7cba1a6c7a68f3b26&amp;chksm=fb39a203cc4e2b155d58611ff3db8ddc93764e62e1ceae7408a090eb3f47930c1888d48afcf1&amp;mpshare=1&amp;scene=23&amp;srcid=1212j2nZKtddupp89McBeF7K#rd" target="_blank" rel="noopener">GBDT</a></p>
 
           
         
@@ -802,7 +966,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
