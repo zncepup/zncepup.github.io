@@ -3,6 +3,23 @@
   
     
     <entry>
+      <title>最大熵模型</title>
+      <link href="/2018/12/20/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/"/>
+      <url>/2018/12/20/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/</url>
+      
+        <content type="html"><![CDATA[<h2 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h2><p>熵衡量信息量，与不确定性成正相关。最大熵模型中的熵指的是条件熵：</p><script type="math/tex; mode=display">H(Y|X)</script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 熵 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>凸优化</title>
       <link href="/2018/12/12/%E5%87%B8%E4%BC%98%E5%8C%96/"/>
       <url>/2018/12/12/%E5%87%B8%E4%BC%98%E5%8C%96/</url>
